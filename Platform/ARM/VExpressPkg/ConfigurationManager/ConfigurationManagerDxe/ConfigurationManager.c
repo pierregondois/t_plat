@@ -25,7 +25,7 @@
 #include "ArmPlatform.h"
 #include "ConfigurationManager.h"
 #include "Platform.h"
-
+int asd = 4;
 /** The platform configuration repository information.
 */
 STATIC

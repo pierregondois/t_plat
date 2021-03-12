@@ -22,8 +22,8 @@ jobs:
   strategy:
     matrix:
       TARGET_ARM_PLATFORMS:
-        Build.Pkgs: 'VExpressPkg'
-        Build.Targets: 'DEBUG,RELEASE,NO-TARGET'
+        Build.Pkgs: 'JunoPkg'
+        Build.Targets: 'DEBUG,RELEASE,NO-TARGET,NOOPT'
 
   workspace:
     clean: all

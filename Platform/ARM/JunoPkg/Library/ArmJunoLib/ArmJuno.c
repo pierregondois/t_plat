@@ -16,6 +16,8 @@
 
 #include <ArmPlatform.h>
 
+int i = 99;
+
 ARM_CORE_INFO mJunoInfoTable[] = {
   {
     // Cluster 0, Core 0

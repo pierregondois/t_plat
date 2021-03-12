@@ -22,7 +22,6 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         self.ActualTargets = []
         self.ActualArchitectures = []
         self.ActualToolChainTag = ""
-        self.UseBuiltInBaseTools = None
         self.ActualScopes = None
 
     # ####################################################################################### #
@@ -30,16 +29,10 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
     # ####################################################################################### #
 
     def AddCommandLineOptions(self, parserObj):
-        group = parserObj.add_mutually_exclusive_group()
-        group.add_argument("-force_piptools", "--fpt", dest="force_piptools", action="store_true", default=False, help="Force the system to use pip tools")
-        group.add_argument("-no_piptools", "--npt", dest="no_piptools", action="store_true", default=False, help="Force the system to not use pip tools")
+        pass
 
     def RetrieveCommandLineOptions(self, args):
-        super().RetrieveCommandLineOptions(args)
-        if args.force_piptools:
-            self.UseBuiltInBaseTools = True
-        if args.no_piptools:
-            self.UseBuiltInBaseTools = False
+        pass
 
     # ####################################################################################### #
     #                        Default Support for this Ci Build                                #
@@ -128,21 +121,8 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
 
             is_linux = GetHostInfo().os.upper() == "LINUX"
 
-            if self.UseBuiltInBaseTools is None:
-                is_linux = GetHostInfo().os.upper() == "LINUX"
-                # try and import the pip module for basetools
-                try:
-                    import edk2basetools
-                    self.UseBuiltInBaseTools = True
-                except ImportError:
-                    self.UseBuiltInBaseTools = False
-                    pass
-
-            if self.UseBuiltInBaseTools == True:
-                scopes += ('pipbuild-unix',) if is_linux else ('pipbuild-win',)
-                logging.warning("Using Pip Tools based BaseTools")
-            else:
-                logging.warning("Falling back to using in-tree BaseTools")
+            import edk2basetools
+            scopes += ('pipbuild-unix',) if is_linux else ('pipbuild-win',)
 
             if is_linux and self.ActualToolChainTag.upper().startswith("GCC"):
                 if "AARCH64" in self.ActualArchitectures:

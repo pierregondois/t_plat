@@ -159,6 +159,10 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         edk2_platforms_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         return [edk2_platforms_path, os.path.join(edk2_platforms_path, "Platform", "ARM")]
 
+    def GetWorkingDir(self):
+        print("Pierre: GetWorkingDir")
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
     def GetWorkspaceRoot(self):
         ''' get WorkspacePath '''
         print("Pierre: GetWorkspaceRoot")

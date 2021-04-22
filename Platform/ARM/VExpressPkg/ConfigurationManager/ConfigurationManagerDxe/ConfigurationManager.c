@@ -26,6 +26,9 @@
 #include "ConfigurationManager.h"
 #include "Platform.h"
 
+#include <Library/HwInfoParserLib.h>
+#include <Library/TableHelperLib.h>
+
 /** The platform configuration repository information.
 */
 STATIC
@@ -1110,6 +1113,17 @@ EDKII_CONFIGURATION_MANAGER_PROTOCOL VExpressPlatformConfigManagerProtocol = {
   &VExpressPlatRepositoryInfo
 };
 
+EFI_STATUS
+EFIAPI AddObject(
+    IN  VOID *    ParserHandle,
+    IN  VOID                  * Context,
+    IN  CM_OBJ_DESCRIPTOR     * CmObjDesc
+    )
+{
+  ParseCmObjDesc (CmObjDesc);
+  return 0;
+}
+
 /**
   Entrypoint of Configuration Manager Dxe.
 
@@ -1157,6 +1171,10 @@ ConfigurationManagerDxeInitialize (
       Status
       ));
   }
+
+  VOID * ParserHandle;
+  HwInfoParserInit ((VOID*)0x90000000, NULL, &AddObject, &ParserHandle);
+  HwInfoParse (ParserHandle);
 
 error_handler:
   return Status;

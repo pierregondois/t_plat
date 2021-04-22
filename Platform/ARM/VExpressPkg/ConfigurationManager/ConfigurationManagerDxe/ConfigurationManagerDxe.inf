@@ -39,6 +39,8 @@
   UefiBootServicesTableLib
   UefiDriverEntryPoint
   UefiRuntimeServicesTableLib
+  FdtHwInfoParserLib
+  DynamicTableHelperLib
 
 [Protocols]
   gEdkiiConfigurationManagerProtocolGuid

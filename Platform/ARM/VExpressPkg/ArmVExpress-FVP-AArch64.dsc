@@ -40,6 +40,9 @@
   ArmPlatformLib|Platform/ARM/VExpressPkg/Library/ArmVExpressLibRTSM/ArmVExpressLib.inf
   ArmMmuLib|ArmPkg/Library/ArmMmuLib/ArmMmuBaseLib.inf
 
+  FdtHwInfoParserLib|DynamicTablesPkg/Library/FdtHwInfoParserLib/FdtHwInfoParserLib.inf
+  DynamicTableHelperLib|DynamicTablesPkg/Library/Common/TableHelperLib/TableHelperLib.inf
+
   ArmPlatformSysConfigLib|Platform/ARM/VExpressPkg/Library/ArmVExpressSysConfigLib/ArmVExpressSysConfigLib.inf
 !ifdef EDK2_ENABLE_PL111
   LcdHwLib|ArmPlatformPkg/Library/PL111Lcd/PL111Lcd.inf

@@ -166,7 +166,8 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
     def GetWorkspaceRoot(self):
         ''' get WorkspacePath '''
         print("Pierre: GetWorkspaceRoot")
-        return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "edk2")
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "edk2")
 
     def FilterPackagesToTest(self, changedFilesList: list, potentialPackagesList: list) -> list:
         ''' Filter potential packages to test based on changed files. '''

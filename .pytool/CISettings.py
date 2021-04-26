@@ -157,7 +157,11 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         ''' Return a list of workspace relative paths that should be mapped as edk2 PackagesPath '''
         print("Pierre: GetPackagesPath")
         edk2_platforms_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        return [edk2_platforms_path, os.path.join(edk2_platforms_path, "Platform", "ARM")]
+        return [
+            edk2_platforms_path,
+            os.path.join(edk2_platforms_path, "Platform", "ARM"),
+            os.path.join(edk2_platforms_path, "edk2")
+            ]
 
     def GetWorkingDir(self):
         print("Pierre: GetWorkingDir")

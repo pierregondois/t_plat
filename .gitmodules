@@ -4,3 +4,4 @@
 [submodule "edk2"]
   path = edk2
   url = https://github.com/PierreARM/edk2
+  branch = PR

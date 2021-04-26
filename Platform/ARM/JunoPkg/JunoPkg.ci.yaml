@@ -16,8 +16,8 @@
     },
     ## options defined .pytool/Plugin/CompilerPlugin
     "CompilerPlugin": {
-        "DscPath": ""
-        # "DscPath": "ArmJuno.dsc"
+        # "DscPath": ""
+        "DscPath": "ArmJuno.dsc"
     },
 
     ## options defined .pytool/Plugin/HostUnitTestCompilerPlugin

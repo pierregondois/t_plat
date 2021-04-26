@@ -22,7 +22,7 @@
 #define ARM_VE_BOARD_SYS_PCIE_GBE_H           0x0078
 
 #define ARM_VE_BOARD_SYS_ID_REV(word)         ((word >> 28) & 0xff)
-
+#define TEST_PR 0
 // NOR Flash 0
 #define ARM_VE_SMB_NOR0_BASE                  0x08000000
 #define ARM_VE_SMB_NOR0_SZ                    SIZE_64MB

@@ -42,9 +42,6 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
     def GetPackagesSupported(self):
         ''' return iterable of edk2 packages supported by this build.
         These should be edk2 workspace relative paths '''
-        # Not really
-        print("Pierre: GetPackagesSupported")
-        print(os.environ)
         return (
                 "JunoPkg",
                 "VExpressPkg"
@@ -75,7 +72,6 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         '''
         unsupported = set(list_of_requested_packages) - \
             set(self.GetPackagesSupported())
-        print("Pierre SetPackages")
         if(len(unsupported) > 0):
             logging.critical(
                 "Unsupported Package Requested: " + " ".join(unsupported))
@@ -155,14 +151,20 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
 
     def GetPackagesPath(self):
         ''' Return a list of workspace relative paths that should be mapped as edk2 PackagesPath '''
-        print("Pierre: GetPackagesPath")
         edk2_platforms_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        return [edk2_platforms_path, os.path.join(edk2_platforms_path, "Platform", "ARM")]
+        return [
+            edk2_platforms_path,
+            os.path.join(edk2_platforms_path, "Platform", "ARM"),
+            os.path.join(edk2_platforms_path, "edk2")
+            ]
+
+    def GetWorkingDir(self):
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     def GetWorkspaceRoot(self):
         ''' get WorkspacePath '''
-        print("Pierre: GetWorkspaceRoot")
-        return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "edk2")
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        # return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "edk2")
 
     def FilterPackagesToTest(self, changedFilesList: list, potentialPackagesList: list) -> list:
         ''' Filter potential packages to test based on changed files. '''

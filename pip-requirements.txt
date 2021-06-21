@@ -18,7 +18,7 @@
 #antlr4-python3-runtime==4.7.1
 
 
-edk2-pytool-library==0.10.*
+-e ../edk2-pytool-library
 -e ../edk2-pytool-extensions
 edk2-basetools==0.1.2
 antlr4-python3-runtime==4.7.1

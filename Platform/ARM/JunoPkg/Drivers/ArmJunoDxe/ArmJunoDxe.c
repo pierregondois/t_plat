@@ -82,6 +82,10 @@ RestorePciDev (
   IN UINT64                             PciAttr
   )
 {
+  if (PciIo == NULL) {
+    return;
+  }
+
   PciIo->Attributes (
            PciIo,
            EfiPciIoAttributeOperationSet,

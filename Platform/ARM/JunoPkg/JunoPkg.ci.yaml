@@ -26,8 +26,13 @@
     },
     ## options defined .pytool/Plugin/CompilerPlugin
     "CompilerPlugin": {
+<<<<<<< HEAD
         "DscPath": "" # Don't support this test
                       # Build the Package using a PlatformCI, similarly to ArmVirtPkg.
+=======
+        # "DscPath": ""
+        "DscPath": "ArmJuno.dsc"
+>>>>>>> 7fbf30544a70... asd
     },
 
     ## options defined .pytool/Plugin/HostUnitTestCompilerPlugin

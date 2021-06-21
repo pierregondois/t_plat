@@ -153,15 +153,31 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
 
     def GetPackagesPath(self):
         ''' Return a list of workspace relative paths that should be mapped as edk2 PackagesPath '''
+<<<<<<< HEAD
         edk2_platforms_path = self.GetWorkspaceRoot()
         return [
             os.path.join(edk2_platforms_path, "Platform", "ARM"),
             os.path.join(edk2_platforms_path, "edk2")
             ]
+=======
+        edk2_platforms_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        return [
+            edk2_platforms_path,
+            os.path.join(edk2_platforms_path, "Platform", "ARM"),
+            os.path.join(edk2_platforms_path, "edk2")
+            ]
+
+    def GetWorkingDir(self):
+        return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+>>>>>>> 7fbf30544a70... asd
 
     def GetWorkspaceRoot(self):
         ''' get WorkspacePath '''
         return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+<<<<<<< HEAD
+=======
+        # return os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "edk2")
+>>>>>>> 7fbf30544a70... asd
 
     def FilterPackagesToTest(self, changedFilesList: list, potentialPackagesList: list) -> list:
         ''' Filter potential packages to test based on changed files. '''

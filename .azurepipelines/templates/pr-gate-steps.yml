@@ -57,6 +57,15 @@ steps:
     arguments: -c .pytool/CISettings.py -p $(pkgs_to_build) -t ${{ parameters.build_targets}} -a ${{ parameters.build_archs}} TOOL_CHAIN_TAG=${{ parameters.tool_chain_tag}}
   condition: and(gt(variables.pkg_count, 0), succeeded())
 
+# EDK2_PLATFORMS_MODIF_START:
+ # As edk2-platforms may rely on new edk2 modifications, checkout edk2's latest master
+- task: CmdLine@1
+  displayName: Checkout edk2's latest master
+  inputs:
+    script: git submodule update --remote --checkout edk2
+  condition: and(gt(variables.pkg_count, 0), succeeded())
+# EDK2_PLATFORMS_MODIF_END
+
 - task: CmdLine@1
   displayName: Update ${{ parameters.build_pkgs }} ${{ parameters.build_archs}}
   inputs:

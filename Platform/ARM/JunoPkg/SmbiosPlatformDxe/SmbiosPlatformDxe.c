@@ -759,15 +759,15 @@ InstallStructures (
     int TableEntry;
     for ( TableEntry=0; DefaultTables[TableEntry] != NULL; TableEntry++)
     {
-	SmbiosHandle = ((EFI_SMBIOS_TABLE_HEADER*)DefaultTables[TableEntry])->Handle;
-	Status = Smbios->Add (
-	    Smbios,
-	    NULL,
-	    &SmbiosHandle,
-	    (EFI_SMBIOS_TABLE_HEADER*) DefaultTables[TableEntry]
-	    );
-	if (EFI_ERROR(Status))
-	    break;
+  SmbiosHandle = ((EFI_SMBIOS_TABLE_HEADER*)DefaultTables[TableEntry])->Handle;
+  Status = Smbios->Add (
+      Smbios,
+      NULL,
+      &SmbiosHandle,
+      (EFI_SMBIOS_TABLE_HEADER*) DefaultTables[TableEntry]
+      );
+  if (EFI_ERROR(Status))
+      break;
     }
     return Status;
 }

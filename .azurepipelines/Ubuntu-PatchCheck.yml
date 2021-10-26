@@ -32,5 +32,5 @@ steps:
 
 - script: |
     git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
-    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
+    python edk2/BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
   displayName: 'Use PatchCheck.py to verify patch series in pull request'

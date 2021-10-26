@@ -23,8 +23,8 @@ jobs:
   #Use matrix to speed up the build process
   strategy:
     matrix:
-      TARGET_ARM_PLATFORMS:
-        Build.Pkgs: 'JunoPkg'
+      TARGET_PLATFORMS_ARM:
+        Build.Pkgs: 'JunoPkg,Morello,N1Sdp,SgiPkg,VExpressPkg'
         Build.Targets: 'DEBUG,RELEASE,NO-TARGET,NOOPT'
 # EDK2_PLATFORMS_MODIF_END
 

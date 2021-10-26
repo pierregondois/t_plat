@@ -25,12 +25,20 @@ steps:
 - checkout: self
   clean: true
 
+# EDK2_PLATFORMS_MODIF_START:
+ # As edk2-platforms may rely on new edk2 modifications, checkout edk2's latest master
+- script: git submodule update --remote --checkout edk2
+  displayName: Checkout edk2's latest master
+# EDK2_PLATFORMS_MODIF_END
+
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '3.7.x'
     architecture: 'x64'
 
+# EDK2_PLATFORMS_MODIF_START:
 - script: |
     git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
-    python BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
+    python edk2/BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)
   displayName: 'Use PatchCheck.py to verify patch series in pull request'
+# EDK2_PLATFORMS_MODIF_END

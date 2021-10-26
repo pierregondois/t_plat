@@ -129,8 +129,13 @@ LcdPlatformInitializeDisplay (
   )
 {
   EFI_GRAPHICS_PIXEL_FORMAT PixelFormat;
+  UINTN i = 5;
 
   (VOID)Handle;
+
+  if (i) {
+    return 0;
+  }
 
   // PixelBitMask and PixelBltOnly pixel formats are not supported
   PixelFormat = FixedPcdGet32 (PcdGopPixelFormat);

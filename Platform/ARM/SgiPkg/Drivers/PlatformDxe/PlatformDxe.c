@@ -31,6 +31,10 @@ ArmSgiPkgEntryPoint (
     return Status;
   }
 
+  if (Status == EFI_SUCCESS) {
+    return;
+  }
+
   InitVirtioDevices ();
 
   return Status;

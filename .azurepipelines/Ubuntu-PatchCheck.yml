@@ -28,8 +28,7 @@ steps:
 
 # EDK2_PLATFORMS_MODIF_START:
  # As PatchCheck.py is in the edk2 repository, checkout the repo.
-- script: git submodule update --init --remote --checkout edk2
-  displayName: Checkout edk2's latest master
+- template: edk2-checkout.yml
 # EDK2_PLATFORMS_MODIF_END
 
 - task: UsePythonVersion@0

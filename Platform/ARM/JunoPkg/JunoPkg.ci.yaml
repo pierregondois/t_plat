@@ -68,7 +68,6 @@
     "DscCompleteCheck": {
         "IgnoreInf": [""],
         "DscPath": ""  # Don't support this test
-        # "DscPath": "ArmJuno.dsc"  # Don't support this test
     },
 
     ## options defined .pytool/Plugin/HostUnitTestDscCompleteCheck

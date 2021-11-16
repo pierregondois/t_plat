@@ -40,15 +40,15 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
     # ####################################################################################### #
 
     def GetPackagesSupported(self):
-        ''' return iterable of edk2 packages supported by this build.
-        These should be edk2 workspace relative paths '''
+        ''' return iterable of edk2-platforms packages supported by this build.
+        These should be edk2-platforms workspace relative paths '''
         return (
                 "JunoPkg",
                 "VExpressPkg"
                 )
 
     def GetArchitecturesSupported(self):
-        ''' return iterable of edk2 architectures supported by this build '''
+        ''' return iterable of edk2-platforms architectures supported by this build '''
         return (
                 "IA32",
                 "X64",
@@ -57,7 +57,7 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
                 "RISCV64")
 
     def GetTargetsSupported(self):
-        ''' return iterable of edk2 target tags supported by this build '''
+        ''' return iterable of edk2-platforms target tags supported by this build '''
         return ("DEBUG", "RELEASE", "NO-TARGET", "NOOPT")
 
     # ####################################################################################### #
@@ -139,8 +139,6 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         '''
         rs = []
         rs.append(RequiredSubmodule(
-            "edk2", True))
-        rs.append(RequiredSubmodule(
             "Silicon/RISC-V/ProcessorPkg/Library/RiscVOpensbiLib/opensbi", False))
         return rs
 
@@ -152,7 +150,7 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         ]
 
     def GetPackagesPath(self):
-        ''' Return a list of workspace relative paths that should be mapped as edk2 PackagesPath '''
+        ''' Return a list of workspace relative paths that should be mapped as edk2-platforms PackagesPath '''
         edk2_platforms_path = self.GetWorkspaceRoot()
         return [
             os.path.join(edk2_platforms_path, "Platform", "ARM"),

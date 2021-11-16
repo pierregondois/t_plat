@@ -18,6 +18,7 @@ steps:
 - checkout: self
   clean: true
   fetchDepth: 1
+- checkout: https://github.com/tianocore/edk2
 
 - template: edk2-checkout.yml
 

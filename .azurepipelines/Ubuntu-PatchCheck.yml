@@ -32,6 +32,19 @@ steps:
     architecture: 'x64'
 
 # EDK2_PLATFORMS_MODIF_START:
+# Get dependencies. PatchCheck.py is in edk2, which is downloaded by stuart_update.
+- task: CmdLine@1
+  displayName: Setup
+  inputs:
+    filename: stuart_setup
+    arguments: -c .pytool/CISettings.py
+
+- task: CmdLine@1
+  displayName: Update
+  inputs:
+    filename: stuart_update
+    arguments: -c .pytool/CISettings.py
+
 - script: |
     git fetch origin $(System.PullRequest.TargetBranch):$(System.PullRequest.TargetBranch)
     python edk2_extdep/edk2/BaseTools/Scripts/PatchCheck.py $(System.PullRequest.TargetBranch)..$(System.PullRequest.SourceCommitId)

@@ -1,0 +1,9 @@
+{
+    "scope": "edk2-repo",
+    "type": "git",
+    "name": "edk2",
+    "source": "https://github.com/tianocore/edk2",
+    "version": "e1e7306b54147e65cb7347b060e94f336d4a82d2",
+    "internal_path": "/edk2/",
+    "flags": []
+}

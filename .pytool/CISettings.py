@@ -40,15 +40,15 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
     # ####################################################################################### #
 
     def GetPackagesSupported(self):
-        ''' return iterable of edk2 packages supported by this build.
-        These should be edk2 workspace relative paths '''
+        ''' return iterable of edk2-platforms packages supported by this build.
+        These should be edk2-platforms workspace relative paths '''
         return (
                 "JunoPkg",
                 "VExpressPkg"
                 )
 
     def GetArchitecturesSupported(self):
-        ''' return iterable of edk2 architectures supported by this build '''
+        ''' return iterable of edk2-platforms architectures supported by this build '''
         return (
                 "IA32",
                 "X64",
@@ -57,7 +57,7 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
                 "RISCV64")
 
     def GetTargetsSupported(self):
-        ''' return iterable of edk2 target tags supported by this build '''
+        ''' return iterable of edk2-platforms target tags supported by this build '''
         return ("DEBUG", "RELEASE", "NO-TARGET", "NOOPT")
 
     # ####################################################################################### #
@@ -130,6 +130,10 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
                     scopes += ("gcc_arm_linux",)
                 if "RISCV64" in self.ActualArchitectures:
                     scopes += ("gcc_riscv64_unknown",)
+
+            if not shell_environment.GetBuildVars().GetValue("EDK2_REPO", ""):
+                    scopes += ("edk2-repo",)
+
             self.ActualScopes = scopes
         return self.ActualScopes
 
@@ -138,8 +142,6 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         If no RequiredSubmodules return an empty iterable
         '''
         rs = []
-        rs.append(RequiredSubmodule(
-            "edk2", True))
         rs.append(RequiredSubmodule(
             "Silicon/RISC-V/ProcessorPkg/Library/RiscVOpensbiLib/opensbi", False))
         return rs
@@ -152,12 +154,19 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
         ]
 
     def GetPackagesPath(self):
-        ''' Return a list of workspace relative paths that should be mapped as edk2 PackagesPath '''
-        edk2_platforms_path = self.GetWorkspaceRoot()
-        return [
-            os.path.join(edk2_platforms_path, "Platform", "ARM"),
-            os.path.join(edk2_platforms_path, "edk2")
-            ]
+        ''' Return a list of workspace relative paths that should be mapped as edk2-platforms PackagesPath '''
+        packages = []
+
+        edk2_repo = shell_environment.GetBuildVars().GetValue("EDK2_REPO", "")
+        if not edk2_repo:
+            edk2_repo = os.path.join("edk2_extdep", "edk2")
+        packages.append(edk2_repo)
+
+        # shell_environment.GetBuildVars().SetValue("EDK_TOOLS_PATH", os.path.join(edk2_repo, "BaseTools"), "TODO no comment ?")
+
+        packages.append(os.path.join("Platform", "ARM"))
+        print(f"Pierre:{packages}")
+        return packages
 
     def GetWorkspaceRoot(self):
         ''' get WorkspacePath '''
@@ -176,9 +185,4 @@ class Settings(CiBuildSettingsManager, UpdateSettingsManager, SetupSettingsManag
                 build_these_packages = possible_packages
                 break
 
-            # BaseTools files that might change the build
-            if "BaseTools" in nodes:
-                if os.path.splitext(f) not in [".txt", ".md"]:
-                    build_these_packages = possible_packages
-                    break
         return build_these_packages
